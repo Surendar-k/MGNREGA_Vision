@@ -1,5 +1,5 @@
 // src/api/mgnregaApi.js
-const BASE_URL = "http://localhost:5000/api/mgnrega"; // Update with your server URL
+const BASE_URL = "https://mgnrega-vision-1.onrender.com/api/mgnrega"; // Update with your server URL
 
 // Fetch MGNREGA data with filters
 export const getMgnregaData = async (

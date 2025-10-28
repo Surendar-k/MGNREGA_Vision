@@ -5,7 +5,7 @@ import { getMgnregaData } from "../../api/mgnregaApi";
 import FilterBar from "../FilterBar";
 import { Loader2, AlertCircle, MapPin, TrendingUp, Users, Briefcase, Home } from "lucide-react";
 import DetailModal from "../DetailModel";
-import DashboardCard from "../DashboardCard";
+
 
 const Dashboard = () => {
   const { t } = useTranslation();
