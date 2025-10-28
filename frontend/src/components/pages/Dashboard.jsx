@@ -25,35 +25,82 @@ const Dashboard = () => {
 
   const itemsPerPage = 9;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        setError("");
-        setCurrentPage(1);
-        const result = await getMgnregaData(
-          stateFilter,
-          districtFilter,
-          finYearFilter,
-          monthFilter,
-          districtNameFilter
-        );
-        setData(result.data || []);
-      } catch (err) {
-        console.error(err);
-        setError("Failed to fetch MGNREGA data.");
-      } finally {
-        setLoading(false);
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      setCurrentPage(1);
+
+      const result = await getMgnregaData(
+        stateFilter,
+        districtFilter,
+        finYearFilter,
+        monthFilter,
+        districtNameFilter
+      );
+
+      let records = result.data || [];
+
+      // ✅ Filter by financial year & month if selected
+      if (finYearFilter) {
+        records = records.filter((item) => item.fin_year === finYearFilter);
       }
-    };
-    fetchData();
-  }, [
-    stateFilter,
-    districtFilter,
-    finYearFilter,
-    monthFilter,
-    districtNameFilter,
-  ]);
+      if (monthFilter) {
+        records = records.filter((item) => item.month === monthFilter);
+      }
+
+      // ✅ Group by district_name (case-insensitive)
+      const districtMap = new Map();
+
+      for (const item of records) {
+        const key = (item.district_name || "").trim().toUpperCase();
+        if (!key) continue;
+
+        if (!districtMap.has(key)) {
+          districtMap.set(key, {
+            ...item,
+            district_name: item.district_name, // keep original name
+            Total_Exp: Number(item.Total_Exp) || 0,
+            Total_No_Of_Works_Takenup:
+              Number(item.Total_No_Of_Works_Takenup || item.Total_No_of_Works_Takenup) || 0,
+            Total_No_Of_Job_Cards_Issued:
+              Number(item.Total_No_Of_Job_Cards_Issued || item.Total_No_of_JobCards_issued) || 0,
+            Total_Households_Worked:
+              Number(item.Total_Households_Worked || item.Total_No_of_Households_Worked) || 0,
+          });
+        } else {
+          const existing = districtMap.get(key);
+          existing.Total_Exp += Number(item.Total_Exp) || 0;
+          existing.Total_No_Of_Works_Takenup +=
+            Number(item.Total_No_Of_Works_Takenup || item.Total_No_of_Works_Takenup) || 0;
+          existing.Total_No_Of_Job_Cards_Issued +=
+            Number(item.Total_No_Of_Job_Cards_Issued || item.Total_No_of_JobCards_issued) || 0;
+          existing.Total_Households_Worked +=
+            Number(item.Total_Households_Worked || item.Total_No_of_Households_Worked) || 0;
+        }
+      }
+
+      // ✅ Convert Map back to array
+      const uniqueDistricts = Array.from(districtMap.values());
+      setData(uniqueDistricts);
+    } catch (err) {
+      console.error(err);
+      setError("Failed to fetch MGNREGA data.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchData();
+}, [
+  stateFilter,
+  districtFilter,
+  finYearFilter,
+  monthFilter,
+  districtNameFilter,
+]);
+
 
   const formatValue = (value, isCurrency = false) => {
     if (value === null || value === undefined || value === "") return "—";

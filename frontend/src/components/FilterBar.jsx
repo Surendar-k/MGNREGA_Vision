@@ -5,8 +5,7 @@ import { Filter, MapPin, Calendar, Map, LocateFixed } from "lucide-react";
 
 const FilterBar = () => {
   const {
-    districtFilter,
-    setDistrictFilter,
+    
     districtNameFilter,
     setDistrictNameFilter,
     finYearFilter,
@@ -24,7 +23,7 @@ const FilterBar = () => {
   const finYears = ["2024-2025", "2023-2024", "2022-2023", "2021-2022", "2020-2021"];
   const months = [
     "Jan",
-    "February",
+    "Feb",
     "March",
     "April",
     "May",
@@ -32,7 +31,7 @@ const FilterBar = () => {
     "July",
     "Aug",
     "Sep",
-    "October",
+    "Oct",
     "Nov",
     "Dec",
   ];
@@ -180,18 +179,8 @@ const detectLocation = async () => {
       </div>
 
       {/* District code */}
-      <div className="flex items-center gap-2">
-        <Filter className="text-blue-600" size={20} />
-        <input
-          type="text"
-          placeholder="District code (e.g., 0101)"
-          className="p-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 outline-none w-44 text-sm shadow-sm"
-          value={districtFilter}
-          onChange={(e) => setDistrictFilter(e.target.value)}
-        />
-      </div>
 
-      {/* District name */}
+      {/* Districtname */}
       <div className="flex items-center gap-2">
         <Map className="text-blue-600" size={20} />
         <input
