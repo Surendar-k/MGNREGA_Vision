@@ -19,6 +19,7 @@ import DetailModal from "../DetailModel";
 
 const Dashboard = () => {
   const { t } = useTranslation();
+  
   const {
     stateFilter,
     districtFilter,
@@ -203,88 +204,90 @@ const Dashboard = () => {
 
 
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-1.5 h-12 bg-gradient-to-b from-indigo-600 to-blue-600 rounded-full"></div>
-            <div>
-              <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
-                MGNREGA Dashboard
-              </h1>
-              <p className="text-slate-600 mt-1.5 text-sm font-medium">
-                Employment & Fund Utilization Analytics
-              </p>
-            </div>
-          </div>
-        </div>
+  
+<div className="mb-8">
+  <div className="flex items-center gap-3 mb-3">
+    <div className="w-1.5 h-12 bg-gradient-to-b from-indigo-600 to-blue-600 rounded-full"></div>
+    <div>
+      <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+        {t("MGNREGA Dashboard")}
+      </h1>
+      <p className="text-slate-600 mt-1.5 text-sm font-medium">
+        {t("Employment & Fund Utilization Analytics")}
+      </p>
+    </div>
+  </div>
+</div>
+
 
         {/* Filters */}
         <div className="mb-8">
           <FilterBar />
         </div>
 
-        {/* Summary Cards */}
-        {!loading && data.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            {[
-              {
-                icon: <MapPin className="w-6 h-6 text-indigo-600" />,
-                title: "Total Districts",
-                value: data.length,
-                color: "bg-indigo-50",
-              },
-              {
-                icon: <Briefcase className="w-6 h-6 text-emerald-600" />,
-                title: "Total Works",
-                value: formatValue(
-                  data.reduce(
-                    (sum, i) =>
-                      sum +
-                      (Number(i.Total_No_Of_Works_Takenup || i.Total_No_of_Works_Takenup) ||
-                        0),
-                    0
-                  )
-                ),
-                color: "bg-emerald-50",
-              },
-              {
-                icon: <Users className="w-6 h-6 text-blue-600" />,
-                title: "Job Cards Issued",
-                value: formatValue(
-                  data.reduce(
-                    (sum, i) =>
-                      sum +
-                      (Number(i.Total_No_Of_Job_Cards_Issued || i.Total_No_of_JobCards_issued) ||
-                        0),
-                    0
-                  )
-                ),
-                color: "bg-blue-50",
-              },
-              {
-                icon: <TrendingUp className="w-6 h-6 text-violet-600" />,
-                title: "Total Expenditure",
-                value: formatValue(
-                  data.reduce((sum, i) => sum + (Number(i.Total_Exp) || 0), 0),
-                  true
-                ),
-                color: "bg-violet-50",
-              },
-            ].map((stat, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-2xl p-5 shadow-sm border border-slate-200"
-              >
-                <div className="flex items-center gap-3">
-                  <div className={`p-3 rounded-xl ${stat.color}`}>{stat.icon}</div>
-                  <div>
-                    <p className="text-sm text-slate-600 font-medium">{stat.title}</p>
-                    <p className="text-2xl font-bold text-slate-900">{stat.value}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
+      {!loading && data.length > 0 && (
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    {[
+      {
+        icon: <MapPin className="w-6 h-6 text-indigo-600" />,
+        title: t("Total Districts"),
+        value: data.length,
+        color: "bg-indigo-50",
+      },
+      {
+        icon: <Briefcase className="w-6 h-6 text-emerald-600" />,
+        title: t("Total Works"),
+        value: formatValue(
+          data.reduce(
+            (sum, i) =>
+              sum +
+              (Number(i.Total_No_Of_Works_Takenup || i.Total_No_of_Works_Takenup) ||
+                0),
+            0
+          )
+        ),
+        color: "bg-emerald-50",
+      },
+      {
+        icon: <Users className="w-6 h-6 text-blue-600" />,
+        title: t("Job Cards Issued"),
+        value: formatValue(
+          data.reduce(
+            (sum, i) =>
+              sum +
+              (Number(i.Total_No_Of_Job_Cards_Issued || i.Total_No_of_JobCards_issued) ||
+                0),
+            0
+          )
+        ),
+        color: "bg-blue-50",
+      },
+      {
+        icon: <TrendingUp className="w-6 h-6 text-violet-600" />,
+        title: t("Total Expenditure"),
+        value: formatValue(
+          data.reduce((sum, i) => sum + (Number(i.Total_Exp) || 0), 0),
+          true
+        ),
+        color: "bg-violet-50",
+      },
+    ].map((stat, idx) => (
+      <div
+        key={idx}
+        className="bg-white rounded-2xl p-5 shadow-sm border border-slate-200"
+      >
+        <div className="flex items-center gap-3">
+          <div className={`p-3 rounded-xl ${stat.color}`}>{stat.icon}</div>
+          <div>
+            <p className="text-sm text-slate-600 font-medium">{stat.title}</p>
+            <p className="text-2xl font-bold text-slate-900">{stat.value}</p>
           </div>
-        )}
+        </div>
+      </div>
+    ))}
+  </div>
+)}
+
 
         {/* Main Data Grid */}
         {loading ? (
@@ -294,7 +297,7 @@ const Dashboard = () => {
               {t("loading")} Data...
             </p>
             <p className="text-sm text-slate-500 mt-2">
-              Please wait while we fetch the latest information
+              {t("Please wait while we fetch the latest information")}
             </p>
           </div>
         ) : error ? (
@@ -324,7 +327,7 @@ const Dashboard = () => {
                 >
                   <div className="bg-gradient-to-r from-indigo-600 to-blue-600 p-5">
                     <h3 className="text-lg font-bold text-white">
-                      {rec.district_name || "N/A"}
+                      {t(rec.district_name || "N/A")}
                     </h3>
                     <p className="text-xs text-indigo-100">
                       {rec.fin_year || "—"} • {rec.month || "—"}

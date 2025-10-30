@@ -322,9 +322,10 @@ const DetailModal = ({ district, onClose }) => {
                     <div className="p-2.5 bg-slate-100 rounded-xl">
                       <Icon className={`w-5 h-5 ${section.color}`} />
                     </div>
-                    <h3 className="text-lg font-bold text-slate-900">
-                      {section.title}
-                    </h3>
+                   <h3 className="text-lg font-bold text-slate-900">
+  {t(section.title)}
+</h3>
+
                   </div>
                   <div className="space-y-2">
                     {section.items.map((item, i) => (
@@ -332,9 +333,10 @@ const DetailModal = ({ district, onClose }) => {
                         key={i}
                         className="flex justify-between items-center p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-all duration-200"
                       >
-                        <span className="text-sm font-medium text-slate-700">
-                          {item.label}
-                        </span>
+                      <span className="text-sm font-medium text-slate-700">
+  {t(item.label)}
+</span>
+
                         <span className="text-sm font-bold text-slate-900 ml-4 text-right">
                           {item.value}
                         </span>
