@@ -3,6 +3,9 @@ import { useTranslation } from "react-i18next";
 import { FilterContext } from "../../context/FilterContext";
 import { getMgnregaData } from "../../api/mgnregaApi";
 import FilterBar from "../FilterBar";
+
+import banner from "../../assets/banner.jpg";
+import banner2 from "../../assets/banner2.png";
 import {
   Loader2,
   AlertCircle,
@@ -168,6 +171,37 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+      {/* ✅ Image Slideshow */}
+<div className="relative overflow-hidden rounded-2xl shadow-md mb-5 bg-white">
+  <div className="flex w-[300%] animate-slide">
+    <div className="w-1/3 h-64 sm:h-80 flex items-center justify-center bg-white p-2 sm:p-4">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Ministry_of_Rural_Development.png/1100px-Ministry_of_Rural_Development.png"
+        alt="Ministry of Rural Development"
+        className="w-[95%] h-auto object-contain"
+      />
+    </div>
+
+    <div className="w-1/3 h-64 sm:h-80 flex items-center justify-center bg-white p-2 sm:p-4">
+      <img
+        src={banner}
+        alt="MGNREGA Banner"
+        className="w-[95%] h-auto object-contain"
+      />
+    </div>
+
+    <div className="w-1/3 h-64 sm:h-80 flex items-center justify-center bg-white p-2 sm:p-4">
+      <img
+        src={banner2}
+        alt="NREGA Works"
+        className="w-[95%] h-auto object-contain"
+      />
+    </div>
+  </div>
+</div>
+
+
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-3">

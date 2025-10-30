@@ -1,9 +1,11 @@
+// src/components/Header.jsx
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Phone, Mail } from "lucide-react";
+import logo from "../assets/images.png";
 
 const Header = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const changeLanguage = (lng) => i18n.changeLanguage(lng);
 
@@ -16,11 +18,11 @@ const Header = () => {
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4">
             <span className="flex items-center gap-1">
               <Phone className="w-4 h-4" />
-              <span>Toll Free: 1800-345-6789</span>
+              <span>{t("tollFree") || "Toll Free: 1800-345-6789"}</span>
             </span>
             <span className="flex items-center gap-1">
               <Mail className="w-4 h-4" />
-              <span>support@mgnrega.gov.in</span>
+              <span>{t("supportMail") || "support@mgnrega.gov.in"}</span>
             </span>
           </div>
 
@@ -50,8 +52,12 @@ const Header = () => {
       {/* 🔹 Main Header */}
       <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center sm:justify-start gap-4">
         {/* Logo or Emblem */}
-        <div className="w-14 h-14 sm:w-16 sm:h-16 bg-blue-900 rounded-full flex items-center justify-center shadow-md">
-          <span className="text-white text-2xl font-bold">⚜</span>
+        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden shadow-md bg-gray-300 flex items-center justify-center">
+          <img
+            src={logo}
+            alt="Ministry of Rural Development Logo"
+            className="w-full h-full object-contain p-1"
+          />
         </div>
 
         {/* Title & Subtitle */}
@@ -61,6 +67,11 @@ const Header = () => {
           </h1>
           <p className="text-gray-600 text-sm sm:text-base">
             Ministry of Rural Development | Government of India
+          </p>
+
+          {/* Project Subtitle - Our Voice, Our Rights */}
+          <p className="mt-2 text-orange-600 font-semibold text-base sm:text-lg italic tracking-wide">
+            {t("ourVoiceOurRights") || "Our Voice, Our Rights"}
           </p>
         </div>
       </div>
