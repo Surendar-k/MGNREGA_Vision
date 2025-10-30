@@ -4,7 +4,7 @@ import { FilterContext } from "../../context/FilterContext";
 import { getMgnregaData } from "../../api/mgnregaApi";
 import FilterBar from "../FilterBar";
 
-import banner from "../../assets/banner.jpg";
+import banner from "../../assets/banner3.jpg";
 import banner2 from "../../assets/banner2.png";
 import {
   Loader2,
@@ -183,7 +183,7 @@ const Dashboard = () => {
       />
     </div>
 
-    <div className="w-1/3 h-64 sm:h-80 flex items-center justify-center bg-white p-2 sm:p-4">
+    <div className="w-1/3 h-64 sm:h-40 flex items-center justify-center bg-white p-2 sm:p-4">
       <img
         src={banner}
         alt="MGNREGA Banner"
